@@ -28,7 +28,8 @@ except IOError:
 
 blocks = yaml.load(source_file, Loader=yaml.FullLoader)
 for x in blocks:
-    if x.get('op') == 'add':
+    # assumption is we only care about things that are dictionary for env variables
+    if x.get('op') == 'add' and type(x['value']) is dict:
         name = x['value']['name']
         value = x['value']['value']
 
